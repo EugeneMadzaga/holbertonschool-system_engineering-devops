@@ -4,7 +4,7 @@
 sudo apt-get update
 sudo apt -y install haproxy
 echo "frontend Local_Server
-    bind 10.10.255.92:80
+    bind 54.159.189.131:80
     mode http
     default_backend My_Web_Servers
 backend My_Web_Servers
