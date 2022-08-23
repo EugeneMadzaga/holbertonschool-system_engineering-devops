@@ -22,3 +22,4 @@ printf %s "server {
 echo "Holberton School" >/var/www/html/index.html
 printf "%s\n" "Ceci n'est pas une page" >/var/www/html/404.html
 service nginx restart
+
