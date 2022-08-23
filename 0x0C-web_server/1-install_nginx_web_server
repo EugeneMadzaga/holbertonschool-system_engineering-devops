@@ -11,10 +11,15 @@ echo "Hello World" > /var/www/html/index.html
 printf %s "server {
      listen      80 default_server;
      listen      [::]:80 default_server;
+	 
      root        /var/www/html;
      index       index.html index.htm index.nginx-debian.html;
-	 access_log  /var/log/nginx-access.log;
-	 access_log  /var/log/nginx-error.log;
+	 
+	 server_name 4510-web-01;
+	 
+	 location / {
+                 /var/log/nginx-error.log;
+        }
 }
 " > /etc/nginx/sites-available/default
 
