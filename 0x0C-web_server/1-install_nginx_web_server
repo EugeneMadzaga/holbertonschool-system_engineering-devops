@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
-# install a Nginx web server
-apt-get update
-apt-get -y install nginx
-ufw allow 'Nginx HTTP'
-sudo mkdir -p /var/www/html/index.nginx-debian.html 
-sudo mkdir -p /var/www/html/save_index.nginx-debian.html
-echo "Hello World" > /var/www/html/index.nginx-debian.html
-/etc/init.d/nginx start
+# 1-install_nginx_web_server
+
+### Update operating system packages.
+sudo apt-get -y update
+### Install nginx.
+sudo apt-get -y install nginx
+### Change de defaul content of index.html for nginx.
+echo "Hello World" > index.html
+# send the file to new directory
+sudo mv index.html /var/www/html
+### Start service nginx.
+sudo service nginx start
