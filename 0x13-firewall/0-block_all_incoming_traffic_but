@@ -7,6 +7,6 @@ sed -i 's/IPV6=.*/IPV6=yes/' /etc/default/ufw
 ufw enable
 ufw default deny incoming
 ufw default allow outgoing
-ufw allow 22/tcp
-ufw allow 443/tcp
-ufw allow 80/tcip
+ufw allow 22/ssh
+ufw allow 443/https ssl
+ufw allow 80/http
