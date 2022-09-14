@@ -1,39 +1,35 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2016
-# Requirements:
-#    Install nginx on your web-01 server
-#    Nginx should be listening on port 80
-#    When querying Nginx at its root / with a GET request (requesting a page) using curl,
-#    it must return a page that contains the string Hello World
-#    As an answer file, write a Bash script that configures a new Ubuntu machine to
-#    respect above requirements (this script will be run on the server itself)
-#    You can’t use systemctl for restarting nginx
-# update and install nginx
+# Installs Nginx with the following configurations:
+# Listens on port 80.
+# Returns a page containing "Holberton School" when queried
+# at the root with a curl GET request.
+# Configures /redirect_me as a "301 Moved Permanently".
+# Includes a custom 404 page containing "Ceci n'est pas une page".
+
 apt-get update
 apt-get install -y nginx
 
-# remove in directories in case they exist to avoid errors and then create root directories
-rm -r /var/www/example.com
-mkdir -p /var/www/example.com/html
+mkdir /etc/nginx/html
+touch /etc/nginx/html/index.html
+echo "Hello World" > /etc/nginx/html/index.html
+touch /etc/nginx/html/404.html
+echo "Ceci n'est pas une page" > /etc/nginx/html/404.html
 
-# give permissions to directories and change owners
-chown -R "$USER":"$USER" /var/www/example.com/html
-chmod -R 755 /var/www
+printf %s "server {
+    listen 80;
+    listen [::]:80 default_server;
+    root   /etc/nginx/html;
+    index  index.html index.htm;
 
-# create index file
-touch /var/www/example.com/html/index.html
-echo "Hello World" > /var/www/example.com/html/index.html
+    location /redirect_me {
+        return 301 http://cuberule.com/;
+    }
 
-# create error file
-touch "/var/www/example.com/html/error_page.html"
-echo "Ceci n'est pas une page" > /var/www/example.com/html/error_page.html
+    error_page 404 /404.html;
+    location /404 {
+      root /etc/nginx/html;
+      internal;
+    }
+}" > /etc/nginx/sites-available/default
 
-# copy the new_default file into sites available directorie
-cp new_default /etc/nginx/sites-available/default
-
-# edit config files
-sed -i 's/# server_names_hash_bucket_size 64;/server_names_hash_bucket_size 64;/' /etc/nginx/nginx.conf
-
-# check the syntax and restart the service
-nginx -t
-sudo /etc/init.d/nginx restart
+service nginx restart
