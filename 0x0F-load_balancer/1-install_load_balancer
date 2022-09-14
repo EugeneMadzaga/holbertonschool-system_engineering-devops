@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install your load balancer
+# 1. Install your load balancer
 
 # Installing HAproxy
 if [ ! -x "$(haproxy -version)" ]; then
