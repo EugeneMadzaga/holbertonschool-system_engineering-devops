@@ -12,8 +12,8 @@ sudo sed -i "s/ENABLED=0/ENABLED=1/" /etc/default/haproxy
 
 # Configure HAproxy to web-01 and web-02
 # Distributes with roundrobin
-sudo sed -i "$ a\ \nlisten lb-01\n \
+sudo sed -i "$ a\ \nlisten 4510-lb-01\n\
 \tbind *:80\n\tmode http\n\tbalance roundrobin\n \
-\tserver 4510-web-01 3.80.195.192 check\n \
+\tserver 4510-web-01 3.80.195.192 check\n\
 \tserver 4510-web-02 107.21.190.38 check" /etc/haproxy/haproxy.cfg
 sudo service haproxy start
