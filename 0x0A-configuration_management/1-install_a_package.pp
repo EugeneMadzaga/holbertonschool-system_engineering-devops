@@ -1,6 +1,5 @@
-# install a package
-
+# Using Puppet, install puppet-lint
 package { 'puppet-lint':
-  ensure   => '2.1.0',
-  provider => 'flask',
+  ensure          =>  'installed',
+  install_options =>  ['-v', '2.1.0'],
 }
