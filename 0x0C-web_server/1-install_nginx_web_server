@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # Install nginx on your web-01 server
-mkdir -p /var/www/html
-chown -R $USER:$USER /var/www/html
-chmod -R 755 /var/www
-apt-get update
-apt-get install -y nginx
-chown -R ubuntu /var/www
+sudo mkdir -p /var/www
+sudo mkdir -p /var/www/html
+sudo chown -R $USER:$USER /var/www
+sudo chown -R $USER:$USER /var/www/html
+sudo chmod -R 755 /var/www
+nano /var/www/html/index.html
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available
+sudo nano /etc/nginx/sites-available
 echo "Hello World" > /var/www/html/index.nginx-debian.html
-service nginx start
+sudo service nginx start
