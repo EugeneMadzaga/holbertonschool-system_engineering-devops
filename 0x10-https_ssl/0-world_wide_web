@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # configuring domain zone
 
-# domain="$1" | subdomain="$2" | SDM="$2"
 subdomainInfo () {
     dig "$2"."$1" | awk -v SDM="$2" '/ANSWER SECTION:/{getline; print "The subdomain " SDM " is a " $4 " record and points to " $5}'
 }
