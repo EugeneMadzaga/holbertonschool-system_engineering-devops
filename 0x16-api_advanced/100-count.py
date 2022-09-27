@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Function to count words in hot posts of a given Reddit subreddit"""
+"""Func to count words all hot posts of given Reddit subreddit"""
 
 import re
 import requests
@@ -9,7 +9,7 @@ headers = {'user-agent': 'ubuntu:hbtn:v1.0\
 
 def count_words(subreddit, word_list, after='', occurs={}):
     """
-        Recursive func queries the Reddit API, parses the title of all
+        Recursive func quering Reddit API, parses the title of all
         hot articles, and prints a sorted count of given keywords
         (case-insensitive, delimited by spaces.
         Javascript should count as javascript, but java should not).
@@ -31,7 +31,7 @@ def count_words(subreddit, word_list, after='', occurs={}):
             for a in word_list:
                 try:
                     occurs[a]
-                except KeyError:
+                exception KeyError:
                     occurs[a] = 0
                 finally:
                     occurs[a] += re.subn(r'(?i)(?<!\S)\b{}\b(?!\S)'.format(a),
